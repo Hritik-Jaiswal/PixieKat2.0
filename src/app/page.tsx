@@ -1,101 +1,135 @@
-import Image from "next/image";
+import { Suspense } from "react";
+import HeroSection from "@/components/hero-section";
+import FeaturedCategories from "@/components/featured-categories";
+import ProductGrid from "@/components/product-grid";
+import Statistics from "@/components/statistics";
+import Testimonials from "@/components/testimonials";
+import BlogSection from "@/components/blog-section";
+import ClientButton from "@/components/client-button";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main>
+      <Suspense fallback={<div>Loading hero...</div>}>
+        <HeroSection />
+      </Suspense>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <Suspense fallback={<div>Loading statistics...</div>}>
+        <Statistics />
+      </Suspense>
+
+      <section className="py-16 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Featured Categories</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Browse through our most popular categories and find exactly what you&apos;re looking for
+            </p>
+          </div>
+          <Suspense fallback={<div>Loading categories...</div>}>
+            <FeaturedCategories />
+          </Suspense>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Featured Products</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Browse our selection of top-rated gaming products and services
+            </p>
+          </div>
+          <Suspense fallback={<div>Loading products...</div>}>
+            <ProductGrid />
+          </Suspense>
+          <div className="text-center mt-8">
+            <ClientButton size="lg" showArrow>
+              View All Products
+            </ClientButton>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-3xl font-bold mb-4">Why Choose Us</h2>
+                <p className="text-muted-foreground">
+                  We provide the best gaming services with secure transactions and instant delivery
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <div className="flex gap-4 items-start">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Secure Transactions</h3>
+                    <p className="text-muted-foreground">
+                      Your payments are secured with industry-standard encryption and protected by our secure escrow system.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Instant Delivery</h3>
+                    <p className="text-muted-foreground">
+                      Get your digital products delivered instantly after payment confirmation.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
+                    <p className="text-muted-foreground">
+                      Our dedicated support team is always ready to help you with any questions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <ClientButton size="lg" showArrow>
+                Learn More
+              </ClientButton>
+            </div>
+
+            <div className="relative aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-lg" />
+              <img
+                src="/images/abstract-orange-shapes.jpg"
+                alt="Why Choose Us"
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Suspense fallback={<div>Loading testimonials...</div>}>
+        <Testimonials />
+      </Suspense>
+
+      <Suspense fallback={<div>Loading blog posts...</div>}>
+        <BlogSection />
+      </Suspense>
+    </main>
   );
 }
